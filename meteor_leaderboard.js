@@ -1,23 +1,20 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault("counter", 0);
+// Create a MongoDB Collection which works on the client and also on the server, like a "global variable"
+PlayerList = new Mongo.Collection('players');
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get("counter");
-    }
-  });
+if(Meteor.isClient) {
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
-    }
-  });
-}
+    // Helper functions execute code within templates
+    Template.leaderboard.helpers({
+        'player': function() {
+            // Retrieve all of the data from the "PlayersList" collection
+            return PlayerList.find();
+        }
+    });
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+};
+
+
+
+if(Meteor.isServer) {
+
+};
