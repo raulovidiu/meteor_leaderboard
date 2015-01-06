@@ -6,7 +6,7 @@ if(Meteor.isClient) {
     Template.leaderboard.helpers({
         'player': function() {
             // Retrieve all of the data from the "PlayersList" collection
-            return PlayersList.find();
+            return PlayersList.find({}, {sort: {score: -1, name: 1}});
         },
         'selectedClass': function() {
             // Get the ID of the player being iterated through
