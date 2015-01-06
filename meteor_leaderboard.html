@@ -18,5 +18,10 @@
 
   <input type="button" class="increment" value="Give 5 points">
   <br /> <br />
-  <input type="button" class="decrement" value="Penalise & take 5 points">
+  <input type="button" class="decrement" value="Penalise & take 3 points">
+  <br /> <br />
+
+  {{#if showSelectedPlayer}}
+    <p>Selected player is {{showSelectedPlayer.name}}</p>
+  {{/if}}
 </template>

@@ -8,6 +8,7 @@ if(Meteor.isClient) {
             // Retrieve all of the data from the "PlayersList" collection
             return PlayersList.find({}, {sort: {score: -1, name: 1}});
         },
+
         'selectedClass': function() {
             // Get the ID of the player being iterated through
             var playerId = this._id;
@@ -17,6 +18,11 @@ if(Meteor.isClient) {
             if(playerId === selectedPlayer) {
                 return "selected";
             }
+        },
+
+        'showSelectedPlayer': function() {
+            var selectedPlayer = Session.get('selectedPlayer');
+            return PlayersList.findOne(selectedPlayer);
         }
     });
 
@@ -37,7 +43,7 @@ if(Meteor.isClient) {
 
         'click .decrement': function() {
             var selectedPlayer = Session.get('selectedPlayer');
-            PlayersList.update(selectedPlayer, {$inc: {score: -5}});
+            PlayersList.update(selectedPlayer, {$inc: {score: -3}});
         }
     });
 };
