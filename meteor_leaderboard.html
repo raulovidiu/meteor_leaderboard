@@ -5,6 +5,7 @@
 <body>
   <h1>Participants Leaderboard</h1>
   {{> leaderboard}}
+  {{> addPlayerForm}}
 </body>
 
 
@@ -16,12 +17,21 @@
     {{/each}}
   </ul>
 
+  {{#if showSelectedPlayer}}
+    <p>Selected player is {{showSelectedPlayer.name}}. You can give or penalise this player with points.</p>
+  {{/if}}
+
   <input type="button" class="increment" value="Give 5 points">
   <br /> <br />
   <input type="button" class="decrement" value="Penalise & take 3 points">
   <br /> <br />
+</template>
 
-  {{#if showSelectedPlayer}}
-    <p>Selected player is {{showSelectedPlayer.name}}</p>
-  {{/if}}
+
+
+<template name="addPlayerForm">
+  <form>
+    <input type="text" name="playerName">
+    <input type="submit" value="Add Player">
+  </form>
 </template>
