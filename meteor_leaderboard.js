@@ -22,10 +22,22 @@ if(Meteor.isClient) {
 
     Template.leaderboard.events({
         'click .player': function() {
+            // Retrieve the unique ID of the player that's been clicked
             var playerId = this._id;
             // Sessions are used to store small pieces of data that isn’t saved to the database
             // and won’t be remembered on return visits.
+            // Create a session to store the unique ID of the clicked player
             Session.set('selectedPlayer', playerId);
+        },
+
+        'click .increment': function() {
+            var selectedPlayer = Session.get('selectedPlayer');
+            PlayersList.update(selectedPlayer, {$inc: {score: 5}});
+        },
+
+        'click .decrement': function() {
+            var selectedPlayer = Session.get('selectedPlayer');
+            PlayersList.update(selectedPlayer, {$inc: {score: -5}});
         }
     });
 };
