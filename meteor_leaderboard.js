@@ -7,13 +7,25 @@ if(Meteor.isClient) {
         'player': function() {
             // Retrieve all of the data from the "PlayersList" collection
             return PlayersList.find();
+        },
+        'selectedClass': function() {
+            // Get the ID of the player being iterated through
+            var playerId = this._id;
+            // Get the ID of the player that's been clicked
+            var selectedPlayer = Session.get('selectedPlayer');
+            // If these IDs match, return and aply a css class
+            if(playerId === selectedPlayer) {
+                return "selected";
+            }
         }
     });
 
-    // Events trigger code when certain actions are taken
     Template.leaderboard.events({
         'click .player': function() {
-            console.log("clicked on a li from the .player class");
+            var playerId = this._id;
+            // Sessions are used to store small pieces of data that isn’t saved to the database
+            // and won’t be remembered on return visits.
+            Session.set('selectedPlayer', playerId);
         }
     });
 };
