@@ -7,7 +7,7 @@ if(Meteor.isClient) {
         'player': function() {
             var currentUserId = Meteor.userId();
             // Retrieve all of the data from the "PlayersList" collection
-            return PlayersList.find({createdBy: currentUserId}, {sort: {score: -1, name: 1}});
+            return PlayersList.find({}, {sort: {score: -1, name: 1}});
         },
 
         'selectedClass': function() {
@@ -65,10 +65,15 @@ if(Meteor.isClient) {
             });
         }
     });
+
+    Meteor.subscribe('thePlayers');
 };
 
 
 
 if(Meteor.isServer) {
-
+    Meteor.publish('thePlayers', function() {
+        var currentUserId = this.userId;
+        return PlayersList.find({createdBy: currentUserId});
+    });
 };
