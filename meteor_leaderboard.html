@@ -4,10 +4,13 @@
 
 <body>
   {{> loginButtons}}
+
   <br />
 
   <h1>Participants Leaderboard</h1>
+
   {{> leaderboard}}
+
   {{> addPlayerForm}}
 </body>
 
@@ -28,15 +31,19 @@
   <br /> <br />
   <input type="button" class="decrement" value="Penalise & take 3 points">
   <br /> <br />
-  <input type="button" class="remove" value="Delete Player">
+  {{#if currentUser}}
+    <input type="button" class="remove" value="Delete Player">
+  {{/if}}
   <br /> <br />
 </template>
 
 
 
 <template name="addPlayerForm">
-  <form>
-    <input type="text" name="playerName">
-    <input type="submit" value="Add Player">
-  </form>
+  {{#if currentUser}}
+    <form>
+      <input type="text" name="playerName">
+      <input type="submit" value="Add Player">
+    </form>
+  {{/if}}
 </template>
