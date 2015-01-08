@@ -3,36 +3,46 @@
 </head>
 
 <body>
-  {{> loginButtons}}
+  <div class="jumbotron">
+    <div class="container-fluid">
+      <br />
 
-  <br />
+      {{> loginButtons}}
 
-  <h1>Participants Leaderboard</h1>
+      <br />
 
-  {{> leaderboard}}
+      <h2>Participants Leaderboard</h2>
 
-  {{> addPlayerForm}}
+      <br />
+
+      {{> addPlayerForm}}
+
+      {{> leaderboard}}
+    </div>
+  </div>
 </body>
 
 
 
 <template name="leaderboard">
-  <ul>
+  <ul class="list-group">
     {{#each player}}
-      <li class="player {{selectedClass}}">{{name}}: {{score}}</li>
+      <li class="list-group-item player {{selectedClass}} breadcrumb">{{name}}: {{score}}</li>
     {{/each}}
   </ul>
 
   {{#if showSelectedPlayer}}
-    <p>Selected player is {{showSelectedPlayer.name}}. You can give or penalise this player with points, or even delete it.</p>
+    <p>Selected player is <strong>{{showSelectedPlayer.name}}</strong>. You can give or penalise this player with points, or even delete it.</p>
   {{/if}}
 
+  <br />
+
   {{#if currentUser}}
-    <input type="button" class="increment" value="Give 5 points">
-    <br /> <br />
-    <input type="button" class="decrement" value="Penalise & take 3 points">
-    <br /> <br />
-    <input type="button" class="remove" value="Delete Player">
+    <input type="button" class="increment btn btn-success" value="Give 5 points">
+    or
+    <input type="button" class="decrement btn btn-warning" value="Penalise the player">
+    <br /> <br /> <br />
+    <input type="button" class="remove btn btn-danger" value="Delete Player">
   {{/if}}
   <br /> <br />
 </template>
@@ -43,7 +53,7 @@
   {{#if currentUser}}
     <form>
       <input type="text" name="playerName">
-      <input type="submit" value="Add Player">
+      <input type="submit" value="Add Player" class="btn btn-primary">
     </form>
   {{/if}}
 </template>
